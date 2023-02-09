@@ -4,6 +4,9 @@ object Build {
 
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
 
-    private const val hiltAndroidGradlePluginVersion = "2.38.1"
+    private const val hiltAndroidGradlePluginVersion = "2.44.2"
     const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltAndroidGradlePluginVersion"
+
+    private const val lifecycleViewModelVersion = "2.4.0"
+    const val viewModelCompiler = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleViewModelVersion"
 }
