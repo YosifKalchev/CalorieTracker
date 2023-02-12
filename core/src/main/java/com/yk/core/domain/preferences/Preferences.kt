@@ -7,7 +7,7 @@ import com.yk.core.domain.model.UserInfo
 
 interface Preferences {
 
-    fun sageGender(gender: Gender)
+    fun saveGender(gender: Gender)
     fun saveAge(age: Int)
     fun saveWeight(weight: Float)
     fun saveHeight(height: Int)

@@ -10,7 +10,7 @@ import com.yk.core.domain.preferences.Preferences
 class DefaultPreferences(
     private val sharedPref: SharedPreferences
 ): Preferences {
-    override fun sageGender(gender: Gender) {
+    override fun saveGender(gender: Gender) {
         sharedPref.edit()
             .putString(Preferences.KEY_GENDER, gender.name)
             .apply()
