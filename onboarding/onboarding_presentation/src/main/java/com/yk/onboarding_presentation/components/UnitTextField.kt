@@ -42,7 +42,8 @@ fun UnitTextField(
                 .alignBy(LastBaseline)
         )
         Spacer(
-            modifier = Modifier.width(spacing.spaceSmall))
+            modifier = Modifier.width(spacing.spaceSmall)
+        )
         Text(
             text = unit,
             modifier = Modifier.alignBy(LastBaseline)

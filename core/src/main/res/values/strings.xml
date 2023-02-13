@@ -14,6 +14,7 @@
     <string name="error_age_cant_be_empty">The age can\'t be empty</string>
     <string name="error_height_cant_be_empty">The height can\'t be empty</string>
     <string name="error_weight_cant_be_empty">The weight can\'t be empty</string>
+    <string name="error_weight_cant_be_above_200_kg">The weight can\'t be above 200 kg</string>
     <string name="kcal">kcal</string>
     <string name="carbs">Carbs</string>
     <string name="protein">Protein</string>

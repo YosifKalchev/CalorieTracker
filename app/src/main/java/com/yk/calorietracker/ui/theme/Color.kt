@@ -4,6 +4,9 @@ import androidx.compose.ui.graphics.Color
 
 val BrightGreen = Color(0xFF00C713)
 val DarkGreen = Color(0xFF00790C)
+val BrightBlue = Color(0xFF00D9FF)
+val Blue = Color(0xFF0079CA)
+val DarkBlue = Color(0xFF004674)
 val Orange =  Color(0xFFFFAA00)
 val CarbColor = Color(0xFFEEFF00)
 val ProteinColor = Orange
