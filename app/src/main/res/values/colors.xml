@@ -4,4 +4,7 @@
     <color name="dark_green">#FF00790C</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bright_blue">#FF00D9FF</color>
+    <color name="blue">#FF0079CA</color>
+    <color name="_dark_blue">#FF004674</color>
 </resources>

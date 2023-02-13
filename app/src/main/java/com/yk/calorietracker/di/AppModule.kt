@@ -5,6 +5,8 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.yk.core.data.preferences.DefaultPreferences
 import com.yk.core.domain.preferences.Preferences
+import com.yk.core.domain.use_case.FilterOutDigits
+import com.yk.onboarding_domain.use_case.ValidateNutrients
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +31,11 @@ object AppModule {
         sharedPreferences: SharedPreferences
     ): Preferences {
         return DefaultPreferences(sharedPreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun providesFilterOutDigitsUseCase(): FilterOutDigits {
+        return FilterOutDigits()
     }
 }
