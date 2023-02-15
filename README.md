@@ -65,8 +65,6 @@ Each feature module contains non-layer components and 3 layers with distinct set
 
 <img src="https://user-images.githubusercontent.com/65896669/219033599-0b998412-3ae7-4916-9643-39a9156095a3.jpeg" width="600" align="center" hspace="10">
 
-Each feature module contains non-layer components and 3 layers with distinct set of responsibilities.
-
 <img src="https://user-images.githubusercontent.com/65896669/219026796-a4f0a618-89a1-4b68-b21b-87b5e6caeb22.png" width="200" align="center" hspace="10">
 
 ### Presentation layer
