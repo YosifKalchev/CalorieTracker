@@ -27,7 +27,7 @@ class GenderViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    suspend fun onGenderClick(gender: Gender) {
+    fun onGenderClick(gender: Gender) {
         selectedGender = gender
     }
 
