@@ -12,7 +12,8 @@ data class TrackerOverviewState(
     val carbsGoal: Int = 0,
     val proteinGoal: Int = 0,
     val fatGoal: Int = 0,
-    val data: LocalDate = LocalDate.now(),
+    val caloriesGoal: Int = 0,
+    val date: LocalDate = LocalDate.now(),
     val trackedFood: List<TrackedFood> = emptyList(),
     val meals: List<Meal> = defaultMeals
 )
