@@ -110,11 +110,11 @@ Read related articles to have a better understanding of underlying design decisi
 ### Android Studio
 
 1. `Android Studio` -> `File` -> `New` -> `From Version control` -> `Git`
-2. Enter `https://github.com/igorwojda/android-showcase.git` into URL field an press `Clone` button
+2. Enter `https://github.com/YosifKalchev/CalorieTracker.git` into URL field an press `Clone` button
 
 ### Command-line + Android Studio
 
-1. Run `git clone https://github.com/igorwojda/android-showcase.git` command to clone project
+1. Run `git clone https://github.com/YosifKalchev/CalorieTracker.git` command to clone project
 2. Open `Android Studio` and select `File | Open...` from the menu. Select cloned directory and press `Open` button
 
 
