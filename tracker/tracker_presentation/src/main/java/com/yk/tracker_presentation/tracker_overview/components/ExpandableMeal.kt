@@ -1,5 +1,6 @@
 package com.yk.tracker_presentation.tracker_overview.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,8 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import com.yk.core_ui.LocalSpacing
 import com.yk.core.R
+import com.yk.tracker_presentation.components.NutrientInfo
+import com.yk.tracker_presentation.components.UnitDisplay
 import com.yk.tracker_presentation.tracker_overview.Meal
 
 @Composable
@@ -64,7 +68,40 @@ fun ExpandableMeal(
                     )
                 }
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    UnitDisplay(
+                        amount = meal.calories,
+                        unit = stringResource(id = R.string.kcal),
+                        amountTextSize = 30.sp
+                    )
+                    Row {
+                        NutrientInfo(
+                            name = stringResource(id = R.string.carbs),
+                            amount = meal.carbs,
+                            unit = stringResource(id = R.string.grams)
+                        )
+                        Spacer(modifier = Modifier.width(spacing.spaceSmall))
+                        NutrientInfo(
+                            name = stringResource(id = R.string.protein),
+                            amount = meal.protein,
+                            unit = stringResource(id = R.string.grams)
+                        )
+                        Spacer(modifier = Modifier.width(spacing.spaceSmall))
+                        NutrientInfo(
+                            name = stringResource(id = R.string.fat),
+                            amount = meal.fat,
+                            unit = stringResource(id = R.string.grams)
+                        )
+                    }
+                }
             }
+        }
+        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+        AnimatedVisibility(visible = meal.isExpanded) {
+            content()
         }
     }
 }
