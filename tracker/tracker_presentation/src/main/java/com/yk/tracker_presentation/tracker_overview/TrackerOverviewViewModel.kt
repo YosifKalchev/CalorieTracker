@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yk.core.domain.preferences.Preferences
-import com.yk.core.navigation.Route
 import com.yk.core.util.UiEvent
 import com.yk.tracker_domain.use_case.TrackerUsesCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,24 +32,12 @@ class TrackerOverviewViewModel @Inject constructor(
     private var getFoodsForDateJob: Job? = null
 
     init {
+        refreshFoods()
         preferences.saveShouldShowOnboarding(false)
     }
 
     fun onEvent(event: TrackerOverviewEvent) {
-        when (event) {
-            is TrackerOverviewEvent.OnAddFoodClick -> {
-                viewModelScope.launch {
-                    _uiEvent.send(
-                        UiEvent.Navigate(
-                            route = Route.SEARCH
-                                    + "/${event.meal.mealType.name}"
-                                    + "${state.date.dayOfMonth}"
-                                    + "${state.date.monthValue}"
-                                    + "${state.date.year}"
-                        )
-                    )
-                }
-            }
+        when(event) {
             is TrackerOverviewEvent.OnDeleteTrackedFoodClick -> {
                 viewModelScope.launch {
                     trackerUseCases.deleteTrackedFood(event.trackedFood)
