@@ -8,8 +8,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -76,6 +80,15 @@ fun SearchTextField(
                     .align(Alignment.CenterStart)
                     .padding(start = spacing.spaceMedium)
             )
+        }
+        IconButton(
+            onClick = onSearch,
+            modifier = Modifier.align(Alignment.CenterEnd)
+        ) {
+           Icon(
+               imageVector = Icons.Default.Search,
+               contentDescription = stringResource(id = R.string.search)
+           )
         }
     }
 }
