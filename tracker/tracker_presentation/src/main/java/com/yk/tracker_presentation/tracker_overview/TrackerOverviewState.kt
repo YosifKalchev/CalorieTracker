@@ -3,7 +3,6 @@ package com.yk.tracker_presentation.tracker_overview
 import com.yk.tracker_domain.model.TrackedFood
 import java.time.LocalDate
 
-
 data class TrackerOverviewState(
     val totalCarbs: Int = 0,
     val totalProtein: Int = 0,
@@ -14,6 +13,6 @@ data class TrackerOverviewState(
     val fatGoal: Int = 0,
     val caloriesGoal: Int = 0,
     val date: LocalDate = LocalDate.now(),
-    val trackedFood: List<TrackedFood> = emptyList(),
+    val trackedFoods: List<TrackedFood> = emptyList(),
     val meals: List<Meal> = defaultMeals
 )

@@ -18,13 +18,13 @@ object TrackerDomainModule {
     fun provideTrackerUseCases(
         repository: TrackerRepository,
         preferences: Preferences
-    ): TrackerUsesCases {
-        return TrackerUsesCases(
+    ): TrackerUseCases {
+        return TrackerUseCases(
             trackFood = TrackFood(repository),
             searchFood = SearchFood(repository),
             getFoodsForDate = GetFoodsForDate(repository),
             deleteTrackedFood = DeleteTrackedFood(repository),
-            calculateMealNutrients = CalculateMealNutrients(preferences = preferences)
+            calculateMealNutrients = CalculateMealNutrients(preferences)
         )
     }
 }

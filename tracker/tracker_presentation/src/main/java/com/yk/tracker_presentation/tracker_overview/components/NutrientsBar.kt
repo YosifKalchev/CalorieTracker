@@ -14,7 +14,7 @@ import com.yk.core_ui.FatColor
 import com.yk.core_ui.ProteinColor
 
 @Composable
-fun NutrientBar(
+fun NutrientsBar(
     carbs: Int,
     protein: Int,
     fat: Int,
@@ -49,10 +49,10 @@ fun NutrientBar(
         )
     }
     Canvas(modifier = modifier) {
-        if (calories <= calorieGoal) {
+        if(calories <= calorieGoal) {
             val carbsWidth = carbWidthRatio.value * size.width
             val proteinWidth = proteinWidthRatio.value * size.width
-            val fadWidth = fatWidthRatio.value * size.width
+            val fatWidth = fatWidthRatio.value * size.width
             drawRoundRect(
                 color = background,
                 size = size,
@@ -61,7 +61,7 @@ fun NutrientBar(
             drawRoundRect(
                 color = FatColor,
                 size = Size(
-                    width = carbsWidth + proteinWidth + fadWidth,
+                    width = carbsWidth + proteinWidth + fatWidth,
                     height = size.height
                 ),
                 cornerRadius = CornerRadius(100f)

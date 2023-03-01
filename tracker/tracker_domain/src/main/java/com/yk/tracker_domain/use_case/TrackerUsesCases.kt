@@ -1,6 +1,6 @@
 package com.yk.tracker_domain.use_case
 
-data class TrackerUsesCases(
+data class TrackerUseCases(
     val trackFood: TrackFood,
     val searchFood: SearchFood,
     val getFoodsForDate: GetFoodsForDate,

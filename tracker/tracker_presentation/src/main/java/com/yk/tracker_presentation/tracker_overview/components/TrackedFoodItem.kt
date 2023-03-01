@@ -27,7 +27,7 @@ import com.yk.tracker_domain.model.TrackedFood
 import com.yk.core.R
 import com.yk.tracker_presentation.components.NutrientInfo
 
-@OptIn(ExperimentalCoilApi::class)
+@ExperimentalCoilApi
 @Composable
 fun TrackedFoodItem(
     trackedFood: TrackedFood,

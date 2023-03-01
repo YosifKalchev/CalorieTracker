@@ -44,7 +44,6 @@ fun SearchScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.ShowSnackbar -> {
-
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message.asString(context)
                     )
@@ -61,7 +60,7 @@ fun SearchScreen(
             .padding(spacing.spaceMedium)
     ) {
         Text(
-            text = stringResource(id = com.yk.core.R.string.add_meal, mealName),
+            text = stringResource(id = R.string.add_meal, mealName),
             style = MaterialTheme.typography.h2
         )
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
@@ -70,7 +69,7 @@ fun SearchScreen(
             onValueChange = {
                 viewModel.onEvent(SearchEvent.OnQueryChange(it))
             },
-            shouldShowHint = state.isHitVisible,
+            shouldShowHint = state.isHintVisible,
             onSearch = {
                 keyboardController?.hide()
                 viewModel.onEvent(SearchEvent.OnSearch)
@@ -88,11 +87,9 @@ fun SearchScreen(
                         viewModel.onEvent(SearchEvent.OnToggleTrackableFood(food.food))
                     },
                     onAmountChange = {
-                        viewModel.onEvent(
-                            SearchEvent.OnAmountForFoodChange(
-                                food.food, it
-                            )
-                        )
+                        viewModel.onEvent(SearchEvent.OnAmountForFoodChange(
+                            food.food, it
+                        ))
                     },
                     onTrack = {
                         keyboardController?.hide()

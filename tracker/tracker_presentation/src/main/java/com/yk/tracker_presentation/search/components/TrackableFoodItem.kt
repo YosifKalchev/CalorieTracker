@@ -1,6 +1,5 @@
 package com.yk.tracker_presentation.search.components
 
-import android.inputmethodservice.Keyboard
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -38,7 +37,7 @@ import com.yk.core_ui.LocalSpacing
 import com.yk.tracker_presentation.components.NutrientInfo
 import com.yk.tracker_presentation.search.TrackableFoodUiState
 
-@OptIn(ExperimentalCoilApi::class)
+@ExperimentalCoilApi
 @Composable
 fun TrackableFoodItem(
     trackableFoodUiState: TrackableFoodUiState,
@@ -82,7 +81,7 @@ fun TrackableFoodItem(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(100.dp)
-                        .clip(RoundedCornerShape(5.dp))
+                        .clip(RoundedCornerShape(topStart = 5.dp))
                 )
                 Spacer(modifier = Modifier.width(spacing.spaceMedium))
                 Column(
@@ -139,14 +138,14 @@ fun TrackableFoodItem(
                     .fillMaxWidth()
                     .padding(spacing.spaceMedium),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = CenterVertically
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Row {
                     BasicTextField(
                         value = trackableFoodUiState.amount,
                         onValueChange = onAmountChange,
                         keyboardOptions = KeyboardOptions(
-                            imeAction = if (trackableFoodUiState.amount.isNotBlank()) {
+                            imeAction = if(trackableFoodUiState.amount.isNotBlank()) {
                                 ImeAction.Done
                             } else ImeAction.Default,
                             keyboardType = KeyboardType.Number

@@ -30,7 +30,7 @@ fun AddButton(
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(100f))
-            .clickable { onClick }
+            .clickable { onClick() }
             .border(
                 width = 1.dp,
                 color = color,
@@ -42,7 +42,7 @@ fun AddButton(
     ) {
         Icon(
             imageVector = Icons.Default.Add,
-            contentDescription = stringResource(R.string.add),
+            contentDescription = stringResource(id = R.string.add),
             tint = color
         )
         Spacer(modifier = Modifier.width(spacing.spaceMedium))

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yk.core.domain.preferences.Preferences
 import com.yk.core.util.UiEvent
-import com.yk.tracker_domain.use_case.TrackerUsesCases
+import com.yk.tracker_domain.use_case.TrackerUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -20,8 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class TrackerOverviewViewModel @Inject constructor(
     preferences: Preferences,
-    private val trackerUseCases: TrackerUsesCases
-) : ViewModel() {
+    private val trackerUseCases: TrackerUseCases,
+): ViewModel() {
 
     var state by mutableStateOf(TrackerOverviewState())
         private set
@@ -59,7 +59,7 @@ class TrackerOverviewViewModel @Inject constructor(
             is TrackerOverviewEvent.OnToggleMealClick -> {
                 state = state.copy(
                     meals = state.meals.map {
-                        if (it.name == event.meal.name) {
+                        if(it.name == event.meal.name) {
                             it.copy(isExpanded = !it.isExpanded)
                         } else it
                     }
@@ -83,7 +83,7 @@ class TrackerOverviewViewModel @Inject constructor(
                     proteinGoal = nutrientsResult.proteinGoal,
                     fatGoal = nutrientsResult.fatGoal,
                     caloriesGoal = nutrientsResult.caloriesGoal,
-                    trackedFood = foods,
+                    trackedFoods = foods,
                     meals = state.meals.map {
                         val nutrientsForMeal =
                             nutrientsResult.mealNutrients[it.mealType]

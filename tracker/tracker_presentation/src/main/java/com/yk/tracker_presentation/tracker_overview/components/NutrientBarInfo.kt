@@ -31,7 +31,7 @@ fun NutrientBarInfo(
     name: String,
     color: Color,
     modifier: Modifier = Modifier,
-    strokeWidth: Dp = 8.dp
+    strokeWidth: Dp = 8.dp,
 ) {
     val background = MaterialTheme.colors.background
     val goalExceededColor = MaterialTheme.colors.error
@@ -58,7 +58,7 @@ fun NutrientBarInfo(
                 .aspectRatio(1f),
         ) {
             drawArc(
-                color = if (value <= goal) background else goalExceededColor,
+                color = if(value <= goal) background else goalExceededColor,
                 startAngle = 0f,
                 sweepAngle = 360f,
                 useCenter = false,
@@ -68,7 +68,7 @@ fun NutrientBarInfo(
                     cap = StrokeCap.Round
                 )
             )
-            if (value <= goal) {
+            if(value <= goal) {
                 drawArc(
                     color = color,
                     startAngle = 90f,
@@ -89,12 +89,18 @@ fun NutrientBarInfo(
             UnitDisplay(
                 amount = value,
                 unit = stringResource(id = R.string.grams),
-                amountColor = if (value <= goal) MaterialTheme.colors.onPrimary else goalExceededColor,
-                unitColor = if (value <= goal) MaterialTheme.colors.onPrimary else goalExceededColor,
+                amountColor = if(value <= goal) {
+                    MaterialTheme.colors.onPrimary
+                } else goalExceededColor,
+                unitColor = if(value <= goal) {
+                    MaterialTheme.colors.onPrimary
+                } else goalExceededColor
             )
             Text(
                 text = name,
-                color = if (value <= goal) MaterialTheme.colors.onPrimary else goalExceededColor,
+                color = if(value <= goal) {
+                    MaterialTheme.colors.onPrimary
+                } else goalExceededColor,
                 style = MaterialTheme.typography.body1,
                 fontWeight = FontWeight.Light
             )

@@ -19,13 +19,13 @@ class TrackerRepositoryImpl(
     override suspend fun searchFood(
         query: String,
         page: Int,
-        pageSize: Int
+        pagesSize: Int
     ): Result<List<TrackableFood>> {
         return try {
             val searchDto = api.searchFood(
                 query = query,
                 page = page,
-                pageSize = pageSize
+                pageSize = pagesSize
             )
             Result.success(
                 searchDto.products
