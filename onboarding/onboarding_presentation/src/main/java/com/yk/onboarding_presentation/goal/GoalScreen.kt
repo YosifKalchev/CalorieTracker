@@ -1,6 +1,5 @@
 package com.yk.onboarding_presentation.goal
 
-import android.app.Activity
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -11,27 +10,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yk.core.util.UiEvent
 import com.yk.core_ui.LocalSpacing
 import com.yk.core.R
-import com.yk.core.domain.model.ActivityLevel
-import com.yk.core.domain.model.Gender
 import com.yk.core.domain.model.GoalType
 import com.yk.onboarding_presentation.components.ActionButton
 import com.yk.onboarding_presentation.components.SelectableButton
 
 @Composable
 fun GoalScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: GoalViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Success -> onNextClick()
                 else -> Unit
             }
         }

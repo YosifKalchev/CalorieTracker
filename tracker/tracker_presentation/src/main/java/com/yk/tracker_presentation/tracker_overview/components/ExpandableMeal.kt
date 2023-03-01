@@ -28,12 +28,12 @@ fun ExpandableMeal(
     meal: Meal,
     onToggleClick: () -> Unit,
     content: @Composable () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
     Column(
-        modifier = modifier,
+        modifier = modifier
     ) {
         Row(
             modifier = Modifier
@@ -62,7 +62,7 @@ fun ExpandableMeal(
                         imageVector = if (meal.isExpanded) {
                             Icons.Default.KeyboardArrowUp
                         } else Icons.Default.KeyboardArrowDown,
-                        contentDescription = if (meal.isExpanded) {
+                        contentDescription = if(meal.isExpanded) {
                             stringResource(id = R.string.collapse)
                         } else stringResource(id = R.string.extend)
                     )

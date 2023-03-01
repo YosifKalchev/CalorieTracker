@@ -5,23 +5,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yk.core.R
 import com.yk.core.domain.use_case.FilterOutDigits
 import com.yk.core.util.UiEvent
 import com.yk.core.util.UiText
-import com.yk.tracker_domain.use_case.TrackerUsesCases
-import com.yk.core.R
+import com.yk.tracker_domain.use_case.TrackerUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val trackerUseCases: TrackerUsesCases,
+    private val trackerUseCases: TrackerUseCases,
     private val filterOutDigits: FilterOutDigits
-) : ViewModel() {
+): ViewModel() {
 
     var state by mutableStateOf(SearchState())
         private set
@@ -30,14 +29,14 @@ class SearchViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onEvent(event: SearchEvent) {
-        when (event) {
+        when(event) {
             is SearchEvent.OnQueryChange -> {
                 state = state.copy(query = event.query)
             }
             is SearchEvent.OnAmountForFoodChange -> {
                 state = state.copy(
                     trackableFood = state.trackableFood.map {
-                        if (it.food == event.food) {
+                        if(it.food == event.food) {
                             it.copy(amount = filterOutDigits(event.amount))
                         } else it
                     }
@@ -49,15 +48,15 @@ class SearchViewModel @Inject constructor(
             is SearchEvent.OnToggleTrackableFood -> {
                 state = state.copy(
                     trackableFood = state.trackableFood.map {
-                        if (it.food == event.food) {
-                            it.copy(isExpanded = it.isExpanded)
+                        if(it.food == event.food) {
+                            it.copy(isExpanded = !it.isExpanded)
                         } else it
                     }
                 )
             }
             is SearchEvent.OnSearchFocusChange -> {
                 state = state.copy(
-                    isHitVisible = !event.isFocused && state.query.isBlank()
+                    isHintVisible = !event.isFocused && state.query.isBlank()
                 )
             }
             is SearchEvent.OnTrackFoodClick -> {

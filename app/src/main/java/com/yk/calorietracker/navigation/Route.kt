@@ -1,4 +1,4 @@
-package com.yk.core.navigation
+package com.yk.calorietracker.navigation
 
 object Route {
     const val WELCOME = "welcome"

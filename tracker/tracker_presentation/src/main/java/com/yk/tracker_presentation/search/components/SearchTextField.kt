@@ -55,7 +55,7 @@ fun SearchTextField(
                 }
             ),
             keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Search
+                imeAction = ImeAction.Search,
             ),
             modifier = Modifier
                 .clip(RoundedCornerShape(5.dp))
@@ -70,7 +70,7 @@ fun SearchTextField(
                 .padding(end = spacing.spaceMedium)
                 .onFocusChanged { onFocusChanged(it) }
         )
-        if (shouldShowHint) {
+        if(shouldShowHint) {
             Text(
                 text = hint,
                 style = MaterialTheme.typography.body1,
@@ -85,10 +85,10 @@ fun SearchTextField(
             onClick = onSearch,
             modifier = Modifier.align(Alignment.CenterEnd)
         ) {
-           Icon(
-               imageVector = Icons.Default.Search,
-               contentDescription = stringResource(id = R.string.search)
-           )
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = stringResource(id = R.string.search)
+            )
         }
     }
 }
