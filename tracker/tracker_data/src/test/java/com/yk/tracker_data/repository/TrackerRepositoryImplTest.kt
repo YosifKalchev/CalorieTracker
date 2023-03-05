@@ -2,6 +2,7 @@ package com.yk.tracker_data.repository
 
 import com.google.common.truth.Truth.assertThat
 import com.yk.tracker_data.remote.OpenFoodApi
+import com.yk.tracker_data.remote.malformedFoodResponse
 import com.yk.tracker_data.remote.validFoodResponse
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
@@ -57,5 +58,27 @@ class TrackerRepositoryImplTest {
         val result = repository.searchFood("banana", 1, 40)
 
         assertThat(result.isSuccess).isTrue()
+    }
+
+    @Test
+    fun `Search food, invalid response, returns failure`() = runBlocking {
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(403)
+                .setBody(validFoodResponse)
+        )
+        val result = repository.searchFood("banana", 1, 40)
+
+        assertThat(result.isFailure).isTrue()
+    }
+    @Test
+    fun `Search food, malformed response, returns failure`() = runBlocking {
+        mockWebServer.enqueue(
+            MockResponse()
+                .setBody(malformedFoodResponse)
+        )
+        val result = repository.searchFood("banana", 1, 40)
+
+        assertThat(result.isFailure).isTrue()
     }
 }
