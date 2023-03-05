@@ -58,4 +58,17 @@ class TrackerRepositoryImplTest {
 
         assertThat(result.isSuccess).isTrue()
     }
+
+    @Test
+    fun `Search food, invalid response, returns failure`() = runBlocking {
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(403)
+                .setBody(validFoodResponse)
+        )
+        val result = repository.searchFood("banana", 1, 40)
+
+        assertThat(result.isFailure).isTrue()
+    }
+
 }
