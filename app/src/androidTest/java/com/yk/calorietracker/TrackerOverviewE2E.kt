@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -13,9 +14,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import coil.annotation.ExperimentalCoilApi
 import com.google.common.truth.Truth.assertThat
 import com.yk.calorietracker.navigation.Route
 import com.yk.calorietracker.repository.TrackerRepositoryFake
+import com.yk.calorietracker.ui.theme.CalorieTrackerTheme
 import com.yk.core.domain.model.ActivityLevel
 import com.yk.core.domain.model.Gender
 import com.yk.core.domain.model.GoalType
@@ -38,7 +41,8 @@ import org.junit.Rule
 import org.junit.Test
 import kotlin.math.roundToInt
 
-
+@ExperimentalComposeUiApi
+@ExperimentalCoilApi
 @HiltAndroidTest
 class TrackerOverviewE2E {
 
@@ -53,11 +57,11 @@ class TrackerOverviewE2E {
     private lateinit var preferences: Preferences
     private lateinit var trackerOverviewViewModel: TrackerOverviewViewModel
     private lateinit var searchViewModel: SearchViewModel
+
     private lateinit var navController: NavHostController
 
-
     @Before
-    fun setup() {
+    fun setUp() {
         preferences = mockk(relaxed = true)
         every { preferences.loadUserInfo() } returns UserInfo(
             gender = Gender.Male,
@@ -87,69 +91,69 @@ class TrackerOverviewE2E {
             filterOutDigits = FilterOutDigits()
         )
         composeRule.setContent {
-            val scaffoldState = rememberScaffoldState()
-            navController = rememberNavController()
-            Scaffold(
-                modifier = Modifier.fillMaxSize(),
-                scaffoldState = scaffoldState
-            ) {
-
-                NavHost(
-                    navController = navController,
-                    startDestination = Route.TRACKER_OVERVIEW
+            CalorieTrackerTheme {
+                val scaffoldState = rememberScaffoldState()
+                navController = rememberNavController()
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    scaffoldState = scaffoldState
                 ) {
-
-                    composable(Route.TRACKER_OVERVIEW) {
-                        TrackerOverviewScreen(
-                            onNavigateToSearch = { mealName, day, month, year ->
-                                navController.navigate(
-                                    Route.SEARCH +
-                                            "/$mealName" +
-                                            "/$day" +
-                                            "/$month" +
-                                            "/$year"
-                                )
-                            }
-                        )
-                    }
-                    composable(
-                        route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",
-                        arguments = listOf(
-                            navArgument("mealName") {
-                                type = NavType.StringType
-                            },
-                            navArgument("dayOfMonth") {
-                                type = NavType.IntType
-                            },
-                            navArgument("month") {
-                                type = NavType.IntType
-                            },
-                            navArgument("year") {
-                                type = NavType.IntType
-                            },
-                        )
+                    NavHost(
+                        navController = navController,
+                        startDestination = Route.TRACKER_OVERVIEW
                     ) {
-                        val mealName = it.arguments?.getString("mealName")!!
-                        val dayOfMonth = it.arguments?.getInt("dayOfMonth")!!
-                        val month = it.arguments?.getInt("month")!!
-                        val year = it.arguments?.getInt("year")!!
-                        SearchScreen(
-                            scaffoldState = scaffoldState,
-                            mealName = mealName,
-                            dayOfMonth = dayOfMonth,
-                            month = month,
-                            year = year,
-                            onNavigateUp = {
-                                navController.navigateUp()
-                            }
-                        )
+                        composable(Route.TRACKER_OVERVIEW) {
+                            TrackerOverviewScreen(
+                                onNavigateToSearch = { mealName, day, month, year ->
+                                    navController.navigate(
+                                        Route.SEARCH + "/$mealName" +
+                                                "/$day" +
+                                                "/$month" +
+                                                "/$year"
+                                    )
+                                },
+                                viewModel = trackerOverviewViewModel
+                            )
+                        }
+                        composable(
+                            route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",
+                            arguments = listOf(
+                                navArgument("mealName") {
+                                    type = NavType.StringType
+                                },
+                                navArgument("dayOfMonth") {
+                                    type = NavType.IntType
+                                },
+                                navArgument("month") {
+                                    type = NavType.IntType
+                                },
+                                navArgument("year") {
+                                    type = NavType.IntType
+                                },
+                            )
+                        ) {
+                            val mealName = it.arguments?.getString("mealName")!!
+                            val dayOfMonth = it.arguments?.getInt("dayOfMonth")!!
+                            val month = it.arguments?.getInt("month")!!
+                            val year = it.arguments?.getInt("year")!!
+                            SearchScreen(
+                                scaffoldState = scaffoldState,
+                                mealName = mealName,
+                                dayOfMonth = dayOfMonth,
+                                month = month,
+                                year = year,
+                                onNavigateUp = {
+                                    navController.navigateUp()
+                                },
+                                viewModel = searchViewModel
+                            )
+                        }
                     }
                 }
             }
         }
     }
 
-    @SuppressLint("CheckResult")
     @Test
     fun addBreakfast_appearsUnderBreakfast_nutrientsProperlyCalculated() {
         repositoryFake.searchResults = listOf(
@@ -195,6 +199,8 @@ class TrackerOverviewE2E {
             .onNodeWithContentDescription("Search...")
             .performClick()
 
+        composeRule.onRoot().printToLog("COMPOSE TREE")
+
         composeRule
             .onNodeWithText("Carbs")
             .performClick()
@@ -211,5 +217,22 @@ class TrackerOverviewE2E {
                 ?.route
                 ?.startsWith(Route.TRACKER_OVERVIEW)
         )
+
+        composeRule
+            .onAllNodesWithText(expectedCarbs.toStr())
+            .onFirst()
+            .assertIsDisplayed()
+        composeRule
+            .onAllNodesWithText(expectedProtein.toStr())
+            .onFirst()
+            .assertIsDisplayed()
+        composeRule
+            .onAllNodesWithText(expectedFat.toStr())
+            .onFirst()
+            .assertIsDisplayed()
+        composeRule
+            .onAllNodesWithText(expectedCalories.toStr())
+            .onFirst()
+            .assertIsDisplayed()
     }
 }
