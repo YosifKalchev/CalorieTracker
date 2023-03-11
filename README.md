@@ -24,6 +24,7 @@ Multi module app
 * Testing
     * [Unit Tests](https://en.wikipedia.org/wiki/Unit_testing) ([JUnit 5](https://junit.org/junit5/) via
     [android-junit5](https://github.com/mannodermaus/android-junit5))
+    * Integration and End-to-end tests
     * [Mockk](https://mockk.io/) - mocking framework
 * UI
     * [Material design](https://material.io/design)
